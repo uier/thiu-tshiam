@@ -80,7 +80,7 @@ export default {
 
 .btn {
   position: absolute;
-  top: 60%;
+  top: 70%;
   left: 50%;
   transform: translateX(-50%);
   height: 8vh;
