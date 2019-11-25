@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <table border="1" id="mytable" class="Shun-Shii" >
+    <table border="1" id="mytable" cellpadding="8" class="Shun-Shii" >
       <tr v-for="i in 6" :key="i">
-        <td v-for="j in 10" :key="j" :ref="'a' + (10*(i-1)+(j-1))" :style="{ backgroundColor: '#fff', color: '#000' }">
+        <td v-for="j in 10" :key="j" :ref="'a' + (10*(i-1)+(j-1))" :style="{ backgroundColor: '#fff', color: '#000'}">
           {{ items[10*(i-1)+(j-1)] }}
         </td>
       </tr>
@@ -21,7 +21,7 @@ export default {
   data () {
     return {
       items: stuList,
-      temp: -1
+      temp: []
     }
   },
   components: {
@@ -35,8 +35,10 @@ export default {
       });
     },
     async draw() {
-      if ( this.temp != -1 ) {
-        this.$refs['a' + this.temp][0].style.backgroundColor = '#003865';
+      while ( this.temp.length > 0 ) {
+        let t = this.temp.pop();
+        this.$refs['a' + t][0].style.backgroundColor = '#003865';
+        this.$refs['a' + t][0].style.color = '#fff';
       }
       for ( let i=0; i<6; ++i ) {
         var x = Math.floor(Math.random() * 52);
@@ -51,7 +53,7 @@ export default {
           this.$refs['a' + x][0].style.color = '#000';
         }
       }
-      this.temp = x;
+      this.temp.push(x);
       visit[x] = true;
     },
   }
@@ -65,26 +67,17 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  font-size: 38px;
+  font-size: 32px;
   padding: 1%;
   margin: 0;
 }
 
 .Shun-Shii {
-  height: 50vh;
-  width: 98vw;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  margin: 0px auto;
 }
 
 .btn {
-  position: absolute;
-  top: 70%;
-  left: 50%;
-  transform: translateX(-50%);
-  height: 8vh;
-  width: 20vw;
+  margin: 40px auto;
   font-size: 32px;
 }
 </style>
