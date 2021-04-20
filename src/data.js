@@ -1,0 +1,1 @@
+export const stuList = ['A', 'B', 'C']
